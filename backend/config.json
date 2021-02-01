@@ -4,5 +4,5 @@
     "dbPort": 3306,
     "dbName": "mydb",
     "dbUsername": "root",
-    "dbPassword": "SmartConnect@30"
+    "dbPassword": "Dependency"
 }
