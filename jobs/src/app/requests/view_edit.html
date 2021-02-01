@@ -1,0 +1,53 @@
+<div class="container">
+<h1 mat-dialog-title>Request</h1>
+<div mat-dialog-content>
+<div class="row">
+<mat-form-field appearance="outline">
+  <mat-label> Name </mat-label> <input type="text" matInput [(ngModel)]="data.request.name">
+</mat-form-field>
+  </div>
+<div class="row">
+  <div class="col-sm">
+    <mat-form-field appearance="outline">
+      <mat-label> Method </mat-label> <input required disabled type="text" matInput [(ngModel)]="data.request.request.method">
+    </mat-form-field>
+  </div>
+  <div class="col-md">
+    <mat-form-field appearance="outline">
+      <mat-label> URL </mat-label> <input required type="text" matInput [(ngModel)]="data.request.request.url">
+    </mat-form-field>
+  </div>
+  <div class="col-sm">
+    <mat-form-field appearance="outline">
+      <mat-label> Refresh Rate (in Seconds)</mat-label>
+      <mat-select [(ngModel)]="data.request.request_interval_seconds">
+        <mat-option *ngFor="let value of intervals" [value]="value.value" >
+          {{value.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <mat-checkbox [(ngModel)]="!data.request.tolerated_failures"> Send me error reports immediately </mat-checkbox>
+  <mat-checkbox [(ngModel)]="data.request.tolerated_failures"> Send me error reports after it fails consequently </mat-checkbox>
+</div>
+<div class="row">
+  <mat-form-field appearance="outline">
+    <mat-label>Error emails</mat-label>
+    <mat-select [(ngModel)]="data.request.notifications.emails" multiple>
+      <mat-option *ngFor="let user of data.allUsers" [value]="user.name">{{user.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div *ngIf="data.add && response !=undefined" class="row">
+  <div [innerHTML]="response.data" ></div>
+</div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" *ngIf="data.add" (click)="test()"> Test </button>
+  <button mat-raised-button (click)="onNoClick()" class="btn btn-primary" color="accent">Close</button>
+  <button mat-raised-button color="primary" (click)="save()" cdkFocusInitial>Ok</button>
+</div>
+</div>
+

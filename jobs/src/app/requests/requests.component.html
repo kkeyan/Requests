@@ -1,0 +1,80 @@
+
+<mat-tab-group>
+<mat-tab label="Requests" >
+<mat-card>
+  <mat-card-title> Requests </mat-card-title>
+  <div class="search-results">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        (input)="onFilter()"
+        [(ngModel)]="requestFilter"
+        type="text"
+        placeholder="Search term"
+      />
+    </mat-form-field>
+    <button (click)="add_request()" mat-raised-button class="btn btn-primary" color="primary">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >add</mat-icon
+      >
+    </button>
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let request of filterRequests" class="row">
+      <div class="col-md">
+        {{ request.name }}
+      </div>
+      <div>
+        <span class="ml4"> {{ request.status }}</span>
+        <span class="ml4">
+          <mat-icon
+            (click)="view_request(request)"
+            aria-hidden="false"
+            aria-label="Example home icon"
+            >preview</mat-icon
+          >
+        </span>
+        <span class="ml4">
+          <mat-icon
+            *ngIf="request.is_active"
+            aria-hidden="false"
+            (click)="action_request('pause', request)"
+            aria-label="Example home icon"
+            >pause</mat-icon
+          >
+          <mat-icon
+            *ngIf="!request.is_active"
+            aria-hidden="false"
+            (click)="action_request('resume', request)"
+            aria-label="Example home icon"
+            >play_arrow</mat-icon
+          >
+        </span>
+        <span class="ml4">
+          <mat-icon
+            (click)="action_request('delete', request)"
+            aria-hidden="false"
+            aria-label="Example home icon"
+            >delete</mat-icon
+          >
+        </span>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+</mat-tab>
+<mat-tab label="Tasks" >
+  <div class="container">
+<ag-grid-angular
+    style="width: 100%; height: 900px;"
+    class="ag-theme-alpine"
+    [rowData]="allTasks"
+    [defaultColDef]="defaultColDef"
+    (gridReady)="onGridReady($event)"
+    [columnDefs]="gridColumnDef">
+</ag-grid-angular>
+  </div>
+
+</mat-tab>
+</mat-tab-group>

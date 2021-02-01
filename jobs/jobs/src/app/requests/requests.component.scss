@@ -1,0 +1,16 @@
+.search-results{
+display: grid;
+grid-auto-flow: column;
+grid-column-gap: 10px;
+  margin: 4px;
+}
+.btn{
+  max-width: 10px;
+  max-height: 60%
+}
+.mat-grid-tile {
+  background: lightblue;
+}
+mat-icon{
+  cursor: pointer;
+}
